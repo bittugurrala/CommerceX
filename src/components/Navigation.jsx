@@ -7,9 +7,9 @@ const Navigation = () => {
     return (
         <nav className='flex items-center justify-between py-4 border-b border-gray-200 ' >
             {/* Left */}
-            <Link href = "/" className='flex items-center justify-center hover:gap-1'>
-                <Image src = "/logo.png" alt = "CommerceX logo" width = {30} height={30} className="h-6 w-6 md:h-9 md:w-9 transition-transform duration-200 hover:scale-110"/>
-                <h3 className='text-xl tracking-wider transition-transform duration-200 hover:scale-110'>CommerceX</h3>
+            <Link href = "/" className='flex items-center justify-center gap-1'>
+                <Image src = "/shopping.png" alt = "CommerceX logo" width = {30} height={30} className="h-6 w-6 md:h-9 md:w-9 mb-1 transition-transform duration-200 hover:scale-110"/>
+                <h3 className='text-xl tracking-wider'>CommerceX.</h3>
             </Link>
             {/* Right */}
 
