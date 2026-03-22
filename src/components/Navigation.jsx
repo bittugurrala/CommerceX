@@ -5,7 +5,7 @@ import { Search, House, Bell, ShoppingCart } from 'lucide-react'
 
 const Navigation = () => {
     return (
-        <nav className='flex items-center justify-between py-4 border-b border-gray-200' >
+        <nav className='flex items-center justify-between py-4 border-b border-gray-200 ' >
             {/* Left */}
             <Link href = "/" className='flex items-center justify-center hover:gap-1'>
                 <Image src = "/logo.png" alt = "CommerceX logo" width = {30} height={30} className="h-6 w-6 md:h-9 md:w-9 transition-transform duration-200 hover:scale-110"/>
