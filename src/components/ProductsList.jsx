@@ -130,3 +130,7 @@ const ProductsList = () => {
 }
 
 export default ProductsList
+
+// For production saftey, hooks that depend on async routing/navigation state need special handling.
+// Which means the Hooks that can change the URL needs to be wraped around the Suspense tags and also use fallback to collect the error in case
+// For example: useSearchParam() and usePathname() 

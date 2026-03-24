@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { ShoppingBasket, Shirt, Footprints, Glasses, Briefcase,Venus, Hand } from 'lucide-react';
-import { useRouter,useSearchParams } from 'next/navigation';
+import { usePathname, useRouter,useSearchParams } from 'next/navigation';
 
 const categories = [
   {
@@ -48,15 +48,21 @@ const categories = [
 
 const Categories = () => {
 
-    const Cat = useSearchParams()   //This Hook is to access the Search params of the URL
+    const searchParams = useSearchParams()   //This Hook is to access the Search params of the URL
     const router = useRouter()   //This Hook is to push a param to the URL
 
-    const selectedCat = Cat.get("category")
+    const pathName = usePathname()
+
+    const selectedCat = searchParams.get("category") || "all"
     console.log(selectedCat)
 
     // To handle the category clicking action so that the UseRouter pushes the category in to the URL
     const ClickHandler = (slug) =>{ 
-        router.push(`/?category=${slug}`)
+        const params = new URLSearchParams(searchParams)
+        // console.log(params)
+        params.set("category", slug || "all" )
+        // router.push(`${pathName}?${params.toString()}`)
+        router.replace(`${pathName}?${params.toString()}`)
     }
 
     return (
@@ -83,3 +89,35 @@ export default Categories
 
 // by using the Router Hook we can push the concerened URL param and so that as a result the color changes 
 
+/*
+    ** How this URL-based filter is working? 
+    ** ?category=shoes when i get this URL param
+    ** const searchParams = useSearchParams() and const selectedCat = searchParams.get("category") => reads the URL as /products?category=shoes then selectedCat = "shoes"
+    ** UI reacts and updates the color and all
+
+    as well as when I cliced on the other button the URL updates, step by step, as
+    ** const params = new URLSearchParams(searchParams) this line clones the existing params, we need this because searchParams is just to read not to store or copy, 
+    ** params.set("category", slug) this line updates the category
+    **router.push(`${pathName}?${params.toString()}`) this line pushes the updated thing to URL Navigation → URL changes
+    ** Re render happens automatically, with useSearchParams()
+*/
+
+// **whole flow**
+/*
+Click button
+   ↓
+ClickHandler runs
+   ↓
+URL updates (?category=shoes)
+   ↓
+useSearchParams detects change
+   ↓
+Component re-renders
+   ↓
+selectedCat changes
+   ↓
+UI highlights selected category
+*/
+
+/*router.replace when sorting or filtering it doesnot add history it updates the exisiting URL
+where as the router.push add entry as a history*/
