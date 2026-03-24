@@ -32,7 +32,7 @@ const ProductCard = ({product}) => {
             {/* Link to the image */}
             <Link href = {`/products/${product.id}`}>
                 <div className = "relative aspect-2/3">
-                    <Image src = {product.images[productType.color]} alt = "product image" fill className = "object-cover ring-1 transition-transform duration-200 hover:scale-105"/>
+                    <Image src = {product.images[productType.color]} alt = "product image" fill loading='eager' className = "object-cover ring-1 transition-transform duration-200 hover:scale-105"/>
                 </div>
             </Link>
             <div className='flex flex-col gap-4 p-4'>
@@ -53,8 +53,8 @@ const ProductCard = ({product}) => {
                         <span className='text-gray-500'>Color</span>
                         <div className='flex items-center gap-2'>
                             {product.colors.map((color, idx) => (
-                                <div  key= {idx}>
-                                    <div  onClick={() => colorHandler(color)} className='w-3.5 h-3.5 rounded-full' style = {{backgroundColor: color}}></div>
+                                <div  onClick={() => colorHandler(color)} className = {`cursor-pointer ${productType.color === color? "ring-2 ring-gray-300" : ""} rounded-full p-[1.5px]`} key= {idx}>
+                                    <div  className='w-5 h-5 rounded-full' style = {{backgroundColor: color}}></div>
                                 </div>
                             ))}
                         </div>
