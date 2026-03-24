@@ -62,7 +62,7 @@ const Categories = () => {
         // console.log(params)
         params.set("category", slug || "all" )
         // router.push(`${pathName}?${params.toString()}`)
-        router.replace(`${pathName}?${params.toString()}`)
+        router.replace(`${pathName}?${params.toString()}`, {scroll:false})
     }
 
     return (
@@ -100,6 +100,7 @@ export default Categories
     ** params.set("category", slug) this line updates the category
     **router.push(`${pathName}?${params.toString()}`) this line pushes the updated thing to URL Navigation → URL changes
     ** Re render happens automatically, with useSearchParams()
+    ** scroll false doesnot scroll the page when a category is selected.    
 */
 
 // **whole flow**
