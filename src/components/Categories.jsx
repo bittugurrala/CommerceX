@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import React from 'react'
 import { ShoppingBasket, Shirt, Footprints, Glasses, Briefcase,Venus, Hand } from 'lucide-react';
 import { useRouter,useSearchParams } from 'next/navigation';

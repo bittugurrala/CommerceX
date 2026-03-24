@@ -8,6 +8,7 @@ export default function Home() {
         <Image src = "/featured.png" alt = "featured image"fill />
       </div>
       <ProductsList/>
+      
     </div>
   );
 }
