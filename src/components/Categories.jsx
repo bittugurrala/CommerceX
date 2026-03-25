@@ -51,10 +51,10 @@ const Categories = () => {
     const searchParams = useSearchParams()   //This Hook is to access the Search params of the URL
     const router = useRouter()   //This Hook is to push a param to the URL
 
-    const pathName = usePathname()
+    const pathName = usePathname()  //Retains the existing part of the URL
 
     const selectedCat = searchParams.get("category") || "all"
-    console.log(selectedCat)
+    // console.log(selectedCat)
 
     // To handle the category clicking action so that the UseRouter pushes the category in to the URL
     const ClickHandler = (slug) =>{ 
@@ -68,7 +68,7 @@ const Categories = () => {
     return (
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 p-2 rounded-lg mb-4 text-sm bg-gray-200'>
             {categories.map((category) =>( 
-                <div className= {`flex items-center justify-center gap-2 cursor-pointer px-2 py-1 rounded-md ${category.slug===selectedCat ? "bg-white text-black" : "text-gray-500"}`} key = {category.name} onClick = {() => ClickHandler(category.slug)}>
+                <div key = {category.name} className= {`flex items-center justify-center gap-2 cursor-pointer px-2 py-1 rounded-md ${category.slug===selectedCat ? "bg-white text-black" : "text-gray-500"}`} onClick = {() => ClickHandler(category.slug)}>
                     {category.icon}
                     {category.name}
                 </div>
@@ -85,7 +85,7 @@ export default Categories
 // onClick = {() => ClickHandler(category.slug)} as we are calling the function with parameters we cannot using direct call 
 // so we use a callback for this
 
-//  ${category.slug===selectedCat ? "bg-white text-black" : "text-gray-500"}`}  based on the Slug that is in the URL we change the color of the catergory
+//  ${category.slug===selectedCat ? "bg-white text-black" : "text-gray-500"}`}  based on the Slug that is in the URL, we change the color of the catergory
 
 // by using the Router Hook we can push the concerened URL param and so that as a result the color changes 
 
@@ -94,8 +94,7 @@ export default Categories
     ** ?category=shoes when i get this URL param
     ** const searchParams = useSearchParams() and const selectedCat = searchParams.get("category") => reads the URL as /products?category=shoes then selectedCat = "shoes"
     ** UI reacts and updates the color and all
-
-    as well as when I cliced on the other button the URL updates, step by step, as
+      as well as when I clicked on the other button the URL updates, step by step, as
     ** const params = new URLSearchParams(searchParams) this line clones the existing params, we need this because searchParams is just to read not to store or copy, 
     ** params.set("category", slug) this line updates the category
     **router.push(`${pathName}?${params.toString()}`) this line pushes the updated thing to URL Navigation → URL changes

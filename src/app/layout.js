@@ -24,10 +24,10 @@ export default function RootLayout({ children }) {
       lang="en"
       className={` h-full antialiased`}
     >
-      <body className= {`${poppins.className} min-h-full w-full flex flex-col mx-auto sm:max-w-xl px-4 md:max-w-3xl md:px-4 md:py-2 lg:max-w-6xl`}>
-        <div className="flex flex-col">
+      <body className= {`${poppins.className}`}>
+        <div className="mx-auto sm:max-w-xl px-4 md:max-w-3xl md:px-4 md:py-2 lg:max-w-6xl">
           <nav><Navigation/></nav>
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 container px-4">{children}</main>
           <footer><Footer/></footer>
         </div>
         

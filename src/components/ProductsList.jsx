@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react'
 import Categories from './Categories';
 import ProductCard from './ProductCard';
+import Link from 'next/link';
+import Filter from './Filter';
 
 // Temporary Data
 const products= [
@@ -114,15 +116,19 @@ const products= [
   },
 ];
 
-const ProductsList = () => {
+const ProductsList = ({category, params}) => {
     return (
         <div className='w-full mt-1'>
+            
             <Suspense fallback ={<div>Loading...</div>}><Categories/></Suspense>
+            {params === "products" && <Filter/>}
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12'>
                 {products.map((product) =>(
                     <ProductCard key = {product.id} product = {product}/>
-                ) )}
-                
+                ) )}    
+            </div>
+            <div className='flex items-center justify-end mt-4'>
+              <Link href = {category ? `/products/?category=${category}`: `/products`} className='underline text-sm text-gray-500'>View all products</Link>
             </div>
             
         </div>
