@@ -128,7 +128,7 @@ const ProductsList = ({category, params}) => {
                 ) )}    
             </div>
             <div className='flex items-center justify-end mt-4'>
-              <Link href = {category ? `/products/?category=${category}`: `/products`} className='underline text-sm text-gray-500'>View all products</Link>
+              <Link href = {category ? `/products/?category=${category}`: `/products`} className='underline text-sm text-gray-500 transition-transform duration-200 hover:scale-110'>View all products</Link>
             </div>
             
         </div>

@@ -1,6 +1,8 @@
 import ProductsList from '@/components/ProductsList'
 import React from 'react'
 
+export const dynamic = "force-dynamic";
+
 const ProductsPage =({searchParams}) => {
 
 
