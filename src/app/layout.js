@@ -2,6 +2,7 @@ import { Poppins } from "next/font/google";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import "./globals.css";
+import { Suspense } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,11 +26,14 @@ export default function RootLayout({ children }) {
       className={` h-full antialiased`}
     >
       <body className= {`${poppins.className}`}>
-        <div className="mx-auto sm:max-w-xl px-4 md:max-w-3xl md:px-4 md:py-2 lg:max-w-6xl">
-          <nav><Navigation/></nav>
-          <main className="flex-1 container px-4">{children}</main>
-          <footer><Footer/></footer>
-        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <div className="mx-auto sm:max-w-xl px-4 md:max-w-3xl md:px-4 md:py-2 lg:max-w-6xl">
+            <nav><Navigation/></nav>
+            <main className="flex-1 container px-4">{children}</main>
+            <footer><Footer/></footer>
+          </div>
+        </Suspense>
+        
         
       </body>
     </html>
