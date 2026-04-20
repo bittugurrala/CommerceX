@@ -3,10 +3,10 @@ import React from 'react'
 
 export const dynamic = "force-dynamic";
 
-const ProductsPage =({searchParams}) => {
+const ProductsPage =async ({searchParams}) => {
 
 
-    const category = searchParams?.category
+    const category = (await searchParams)?.category
 
     return (
         <div>

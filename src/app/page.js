@@ -1,9 +1,9 @@
 import Image from "next/image";
 import ProductsList from "@/components/ProductsList";
 
-export default function Home({searchParams}) {
+export default async function Home({searchParams}) {
 
-  const category = searchParams?.category 
+  const category = (await searchParams)?.category 
 
   return (
     <div className=" flex flex-col gap-10">
