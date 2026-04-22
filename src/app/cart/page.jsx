@@ -1,3 +1,4 @@
+// For cart icon page(to view the cart items)
 "use client"
 
 import { useParams, useSearchParams, useRouter } from 'next/navigation'
@@ -10,7 +11,7 @@ import PaymentForm from '@/components/PaymentForm'
 import React from 'react'
 
 
-// Steps object
+// Steps object - 3 steps --> Shopping cart, shipping address, Payment method
 const Steps = [
         {
             id : 1,
@@ -99,20 +100,21 @@ const CartItems = [
 ]
 const Cartpage = () => {
 
-    const searchparams = useSearchParams()
-    const router = useRouter()
-    const [shipForm, setShipForm] = useState(null)
+    const searchparams = useSearchParams()          //Hook in NextJS to read the Query params in URL
+    const router = useRouter()                  //Hook used to push routes to the URL
+    const [shipForm, setShipForm] = useState(null)         //To verify weather the user filled step 2 before proceeding to step3
 
-    const activeStep = parseInt(searchparams.get("step") || "1")
+    const activeStep = parseInt(searchparams.get("step") || "1")   //To track the user's current step by default it is step1 and get the step from URL query
 
     return (
 
         <div>
             <div className='flex flex-col gap-8 items-center justify-center mt-12'>
                 {/* Title */}
-                <h1 className='text-2xl font-medium'>Your Shopping Cart</h1>
+                <h1 className='text-2xl font-medium'>Your Shopping Cart</h1> 
 
                 {/* steps */}
+                {/* To display the avaliable steps and the current step the user is in */}
                 <div className='flex flex-col lg:flex-row items-center gap-8 lg:gap-16'>
                     {Steps.map(step => (
                         <div key = {step.id} className={`flex gap-2 items-center border-b-2 pb-4 ${step.id === activeStep? "border-[#4FA3A5]" : "border-gray-200"}`}>
@@ -157,6 +159,7 @@ const Cartpage = () => {
 
                             
                         ))) 
+                        // based on the current steo we decide the step UI and URL and page in the cart
                         : activeStep === 2? (<ShippingForm setShipForm = {setShipForm}/>) : activeStep=== 3 && shipForm? (<PaymentForm/>) : <p className='text-gray-500 text-sm'>Please fill in the Shipping details</p> }
                     </div>
 
@@ -187,7 +190,7 @@ const Cartpage = () => {
                             </div>
 
                         </div>
-                       {activeStep === 1 && <button onClick = {() => {router.push("/cart?step=2",{scroll:false})}} className='bg-gray-800 rounded-lg text-white p-2 cursor-pointer flex items-center justify-center gap-2 transition-transform duration-200 hover:scale-110 hover:bg-gray-500'>
+                       {activeStep === 1 && <button onClick = {() => {router.push("/cart?step=2",{scroll:false})}} className='bg-gray-800 rounded-lg text-white p-2 cursor-pointer flex items-center justify-center gap-2 transition-all duration-400  hover:bg-[#4FA3A5]'>
                             Continue<span ><ArrowRight className='w-3 h-3'/></span>
                         </button>}
 
