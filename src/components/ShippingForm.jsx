@@ -4,6 +4,8 @@ import React from 'react'
 import { useForm } from "react-hook-form"
 import { useRouter } from 'next/navigation'
 
+// React hook form for creating the shipping address form
+// Kindha unna code antha documentation lo undi
 
 
 export default function ShippingForm({setShipForm}){

@@ -130,8 +130,8 @@ const Cartpage = () => {
                     <div className='w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-lg flex flex-col gap-8'>
                         {activeStep === 1 ? 
                         (CartItems.map(item => (
-                            <div key = {item.id} className='flex items-center justify-between'>
-                                <div className='flex gap-16 items-center'>
+                            <div key = {item.id} className='flex items-center justify-around'>
+                                <div className='flex gap-1 md:gap-16 items-center'>
                                     {/* Images */}
                                     <div className='flex gap-8 '>
                                         <div className='relative w-32 h-32 bg-gray-50 rounded-lg overflow-hidden'>
@@ -141,9 +141,9 @@ const Cartpage = () => {
                                     {/* Details of the items in the Cart */}
                                     <div className='text-sm font-medium flex flex-col justify-between'>
                                         {/* Details */}
-                                        <div className='flex flex-col gap-1'>
+                                        <div className='flex flex-col  gap-1 '>
                                             <p className='text-sm font-medium'>{item.name}</p>
-                                            <p className='text-xs text-gray-500'>Quantity:{" "}{item.quantity}</p>
+                                            <p className='text-xs text-gray-500 font-medium'>Quantity:{" "}{item.quantity}</p>
                                             <p className='text-xs text-gray-500'>Size:{" "}{item.selectedSize.toUpperCase()}</p>
                                             <p className='text-xs text-gray-500'>Color:{" "}{item.selectedColor?.charAt(0).toUpperCase() + item.selectedColor?.slice(1)}</p>
                                         </div>

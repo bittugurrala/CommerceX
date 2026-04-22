@@ -1,3 +1,6 @@
+// Payment validation schema 
+// general ga validations kosam ZOD lib vaduthamuu
+
 import {z} from "zod"
 
 const PaymentSchema =  z.object({

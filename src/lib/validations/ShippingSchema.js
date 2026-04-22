@@ -1,3 +1,6 @@
+// Shipping validation schema 
+// using zod 
+
 import {z} from "zod"
 
 const ShippingSchema =  z.object({
