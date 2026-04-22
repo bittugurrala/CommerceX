@@ -143,7 +143,7 @@ const Cartpage = () => {
                                         {/* Details */}
                                         <div className='flex flex-col  gap-1 '>
                                             <p className='text-sm font-medium'>{item.name}</p>
-                                            <p className='text-xs text-gray-500 font-medium'>Quantity:{" "}{item.quantity}</p>
+                                            <p className='text-xs text-gray-500'>Quantity:{" "}{item.quantity}</p>
                                             <p className='text-xs text-gray-500'>Size:{" "}{item.selectedSize.toUpperCase()}</p>
                                             <p className='text-xs text-gray-500'>Color:{" "}{item.selectedColor?.charAt(0).toUpperCase() + item.selectedColor?.slice(1)}</p>
                                         </div>

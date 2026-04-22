@@ -16,12 +16,12 @@ const Navigation = () => {
 
             <div className='flex gap-5  '>
                 <div className='hidden md:flex gap-2 px-2 items-center shadow-md rounded-md ring-1 ring-gray-200 transition-transform duration-200 hover:scale-110'>
-                    <Search className='w-4 h-4 text-gray-500 transition-transform duration-200 hover:scale-110' />
+                    <Search className='w-6 h-6 md:w-4 md:h-4  text-gray-500 transition-transform duration-200 hover:scale-110' />
                     <input placeholder='Search...' className='outline-none py-1 text-gray-600'/>
                 </div>
                 <div className='flex items-center gap-5'>
-                    <Link href= "/"><House className='w-4 h-4 text-gray-600 transition-transform duration-200 hover:scale-110' /></Link>
-                    <Bell className='w-4 h-4 text-gray-600 transition-transform duration-200 hover:scale-110' />
+                    <Link href= "/"><House className='w-6 h-6 md:w-4 md:h-4  text-gray-600 transition-transform duration-200 hover:scale-110' /></Link>
+                    <Bell className='w-6 h-6 md:w-4 md:h-4  text-gray-600 transition-transform duration-200 hover:scale-110' />
                     {/* <ShoppingCart className='w-4 h-4 text-gray-600 transition-transform duration-200 hover:scale-110'/> */}
                     <ShoppingCartIcon/>
                     <Link href = "/login" className='text-sm transition-transform duration-200 hover:scale-110'>Sign in</Link>

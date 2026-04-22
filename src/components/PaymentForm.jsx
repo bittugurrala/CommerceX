@@ -50,13 +50,13 @@ export default function PaymentForm({setShipForm}){
                 <input className='border border-gray-300 rounded-md p-1 focus:outline-none cursor-pointer text-md' {...register("cvv")} placeholder='123' />
                 {errors.cvv && (<p className= "text-sm text-red-500">{errors.cvv.message}</p> )}
             </div>
-            <div className='flex flex-row gap-3'>
-                <Image src = "/paymentOptions/american-express-icon.svg" alt = 'AmeX' width={50} height={50}></Image>
+            <div className='flex flex-row flex-wrap gap-3'>
+                {/* <Image src = "/paymentOptions/american-express-icon.svg" alt = 'AmeX' width={50} height={50}></Image> */}
                 <Image src = "/paymentOptions/visa-icon.png" alt = 'Visa card icon' width={50} height={50}></Image>
-                <Image src = "/paymentOptions/master-card-icon.png" alt = 'Master card Icon' width={50} height={50}></Image>
+                {/* <Image src = "/paymentOptions/master-card-icon.png" alt = 'Master card Icon' width={50} height={50}></Image> */}
                 <Image src = "/paymentOptions/rupay-logo-icon.png" alt = 'Rupay card Icon' width={50} height={50}></Image>
                 <Image src = "/paymentOptions/paytm-icon.png" alt = 'Paytm Icon' width={50} height={50}></Image>
-                <Image src = "/paymentOptions/bank-building-icon.png" alt = 'bank building Icon' width={50} height={50}></Image>
+                {/* <Image src = "/paymentOptions/bank-building-icon.png" alt = 'bank building Icon' width={50} height={50}></Image> */}
                 
             </div>
 
