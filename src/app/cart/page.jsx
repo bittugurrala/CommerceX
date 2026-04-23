@@ -7,8 +7,9 @@ import { useState } from 'react'
 import {ArrowRight, Trash2} from 'lucide-react'
 import ShippingForm from '@/components/ShippingForm'
 import PaymentForm from '@/components/PaymentForm'
-
 import React from 'react'
+import useCartStore from '@/stores/cartStore'
+
 
 
 // Steps object - 3 steps --> Shopping cart, shipping address, Payment method
@@ -28,78 +29,80 @@ const Steps = [
     ]
 
 // Temporary cart items
-const CartItems = [
-    {
-    id: 1,
-    name: "Adidas CoreFit T-Shirt",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 399,
-    sizes: ["s", "m", "l", "xl", "xxl"],
-    colors: ["gray", "purple", "green"],
-    images: {
-      gray: "/products/1g.png",
-      purple: "/products/1p.png",
-      green: "/products/1gr.png",
-    },
-    quantity: 1,
-    selectedSize: "m",
-    selectedColor: "gray"
-  },
-  {
-    id: 2,
-    name: "Puma Ultra Warm Zip",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 599,
-    sizes: ["s", "m", "l", "xl"],
-    colors: ["gray", "green"],
-    images: { gray: "/products/2g.png", green: "/products/2gr.png" },
-    quantity: 1,
-    selectedSize: "l",
-    selectedColor: "gray"
-  },
-  {
-    id: 3,
-    name: "Nike Air Essentials Pullover",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 699,
-    sizes: ["s", "m", "l"],
-    colors: ["green", "blue", "black"],
-    images: {
-      green: "/products/3gr.png",
-      blue: "/products/3b.png",
-      black: "/products/3bl.png",
-    },
-    quantity: 1,
-    selectedSize: "m",
-    selectedColor: "black"
-  },
-  {
-    id: 4,
-    name: "Nike Dri Flex T-Shirt",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 299,
-    sizes: ["s", "m", "l"],
-    colors: ["white", "pink"],
-    images: { white: "/products/4w.png", pink: "/products/4p.png" },
-    quantity: 1,
-    selectedSize: "m",
-    selectedColor: "pink"
-  }
-]
+// const CartItems = [
+//     {
+//     id: 1,
+//     name: "Adidas CoreFit T-Shirt",
+//     shortDescription:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     description:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     price: 399,
+//     sizes: ["s", "m", "l", "xl", "xxl"],
+//     colors: ["gray", "purple", "green"],
+//     images: {
+//       gray: "/products/1g.png",
+//       purple: "/products/1p.png",
+//       green: "/products/1gr.png",
+//     },
+//     quantity: 1,
+//     selectedSize: "m",
+//     selectedColor: "gray"
+//   },
+//   {
+//     id: 2,
+//     name: "Puma Ultra Warm Zip",
+//     shortDescription:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     description:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     price: 599,
+//     sizes: ["s", "m", "l", "xl"],
+//     colors: ["gray", "green"],
+//     images: { gray: "/products/2g.png", green: "/products/2gr.png" },
+//     quantity: 1,
+//     selectedSize: "l",
+//     selectedColor: "gray"
+//   },
+//   {
+//     id: 3,
+//     name: "Nike Air Essentials Pullover",
+//     shortDescription:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     description:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     price: 699,
+//     sizes: ["s", "m", "l"],
+//     colors: ["green", "blue", "black"],
+//     images: {
+//       green: "/products/3gr.png",
+//       blue: "/products/3b.png",
+//       black: "/products/3bl.png",
+//     },
+//     quantity: 1,
+//     selectedSize: "m",
+//     selectedColor: "black"
+//   },
+//   {
+//     id: 4,
+//     name: "Nike Dri Flex T-Shirt",
+//     shortDescription:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     description:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     price: 299,
+//     sizes: ["s", "m", "l"],
+//     colors: ["white", "pink"],
+//     images: { white: "/products/4w.png", pink: "/products/4p.png" },
+//     quantity: 1,
+//     selectedSize: "m",
+//     selectedColor: "pink"
+//   }
+// ]
+
 const Cartpage = () => {
 
+    const {cart, removeFromCart} = useCartStore()
     const searchparams = useSearchParams()          //Hook in NextJS to read the Query params in URL
     const router = useRouter()                  //Hook used to push routes to the URL
     const [shipForm, setShipForm] = useState(null)         //To verify weather the user filled step 2 before proceeding to step3
@@ -129,8 +132,8 @@ const Cartpage = () => {
                     {/* steps(Products that are in the cart) */}
                     <div className='w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-lg flex flex-col gap-8'>
                         {activeStep === 1 ? 
-                        (CartItems.map(item => (
-                            <div key = {item.id} className='flex items-center justify-around'>
+                        (cart.map(item => (
+                            <div key={item.id + item.selectedSize + item.selectedColor} className='flex items-center justify-around'>
                                 <div className='flex gap-1 md:gap-16 items-center justify-center'>
                                     {/* Images */}
                                     <div className='flex gap-8 '>
@@ -154,7 +157,7 @@ const Cartpage = () => {
                                 
 
                                 {/* Delete button */}
-                                <button className='w-8 h-8 rounded-full bg-red-100 hover:bg-red-200 transition-all duration-300 text-red-500 flex items-center justify-center '><Trash2 className='w-4 h-4'/></button>
+                                <button onClick={() => removeFromCart(item)} className='w-8 h-8 rounded-full bg-red-100 hover:bg-red-200 transition-all duration-300 text-red-500 flex items-center justify-center '><Trash2 className='w-4 h-4'/></button>
                             </div>
 
                             
@@ -170,7 +173,7 @@ const Cartpage = () => {
                             <div className='flex justify-between text-sm'>
                                 <p className='text-gray-500'>Sub total</p>
                                 <p className='font-medium'>₹
-                                    {CartItems.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)}
+                                    {cart.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)}
                                 </p>
                             </div>
                             <div className='flex justify-between text-sm'>
@@ -185,7 +188,7 @@ const Cartpage = () => {
                             <div className='flex justify-between'>
                                 <p className='text-gray-800 font-semibold'>Total</p>
                                 <p className='font-medium'>₹
-                                    {CartItems.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)}
+                                    {cart.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)}
                                 </p>
                             </div>
 

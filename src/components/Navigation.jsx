@@ -22,7 +22,6 @@ const Navigation = () => {
                 <div className='flex items-center gap-5'>
                     <Link href= "/"><House className='w-4 h-4 text-gray-600 transition-transform duration-200 hover:scale-110' /></Link>
                     <Bell className='w-4 h-4 text-gray-600 transition-transform duration-200 hover:scale-110' />
-                    {/* <ShoppingCart className='w-4 h-4 text-gray-600 transition-transform duration-200 hover:scale-110'/> */}
                     <ShoppingCartIcon/>
                     <Link href = "/login" className='text-sm transition-transform duration-200 hover:scale-110'>Sign in</Link>
                 </div>
