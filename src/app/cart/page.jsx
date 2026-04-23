@@ -9,6 +9,7 @@ import ShippingForm from '@/components/ShippingForm'
 import PaymentForm from '@/components/PaymentForm'
 import React from 'react'
 import useCartStore from '@/stores/cartStore'
+import { toast } from 'react-toastify'
 
 
 
@@ -102,13 +103,25 @@ const Steps = [
 
 const Cartpage = () => {
 
-    const {cart, removeFromCart} = useCartStore()
+    // const {cart, removeFromCart} = useCartStore()  //destruct 
+
+    // accessing the Global states that we created earlier
+    const cart = useCartStore(state => state.cart)           //using global cart      
+    const removeFromCart = useCartStore(state => state.removeFromCart)     //using global removeFromCart
+
+
     const searchparams = useSearchParams()          //Hook in NextJS to read the Query params in URL
     const router = useRouter()                  //Hook used to push routes to the URL
     const [shipForm, setShipForm] = useState(null)         //To verify weather the user filled step 2 before proceeding to step3
 
     const activeStep = parseInt(searchparams.get("step") || "1")   //To track the user's current step by default it is step1 and get the step from URL query
 
+    const HandleRemoveFromCart = (item)=>{
+        removeFromCart(item)
+        toast.warn("Item removed from cart!")
+
+
+    }
     return (
 
         <div>
@@ -157,7 +170,7 @@ const Cartpage = () => {
                                 
 
                                 {/* Delete button */}
-                                <button onClick={() => removeFromCart(item)} className='w-8 h-8 rounded-full bg-red-100 hover:bg-red-200 transition-all duration-300 text-red-500 flex items-center justify-center '><Trash2 className='w-4 h-4'/></button>
+                                <button onClick={() => HandleRemoveFromCart(item)} className='w-8 h-8 rounded-full bg-red-100 hover:bg-red-200 transition-all duration-300 text-red-500 flex items-center justify-center '><Trash2 className='w-4 h-4'/></button>
                             </div>
 
                             
