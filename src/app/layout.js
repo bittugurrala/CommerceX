@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       className={` h-full antialiased`}>
       <body className= {`${poppins.className}`}>
         <Suspense fallback={<div>Loading...</div>}>
-          <div className="mx-auto sm:max-w-xl px-4 md:max-w-3xl md:px-4 md:py-2 lg:max-w-6xl">
+          <div className="mx-auto sm:max-w-xl px-4 md:max-w-3xl md:px-4 md:py-2 lg:max-w-6xl flex flex-col min-h-screen">
             <nav><Navigation/></nav>
             <main className="flex-1 container px-4">{children}</main>
             <footer><Footer/></footer>

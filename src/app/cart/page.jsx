@@ -101,6 +101,9 @@ const Steps = [
 //   }
 // ]
 
+
+
+
 const Cartpage = () => {
 
     // const {cart, removeFromCart} = useCartStore()  //destruct 
@@ -122,6 +125,11 @@ const Cartpage = () => {
 
 
     }
+    // Payment details
+    const subtotal = cart.reduce((acc, item) => acc + item.quantity * item.price,0);
+    const discount = subtotal * 0.1; // 10% discount
+    const shipping = subtotal > 1000 ? 0 : 100; //If the total amount is less than 1000-> shipping charges else no
+    const total = subtotal - discount + shipping;
     return (
 
         <div>
@@ -185,23 +193,23 @@ const Cartpage = () => {
                         <div className='flex flex-col gap-4'>
                             <div className='flex justify-between text-sm'>
                                 <p className='text-gray-500'>Sub total</p>
-                                <p className='font-medium'>₹
-                                    {cart.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)}
+                                <p className='font-medium'>₹{subtotal.toFixed(2)}
+                                    {/* {cart.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)} */}
                                 </p>
                             </div>
                             <div className='flex justify-between text-sm'>
                                 <p className='text-gray-500'>Discount(10%)</p>
-                                <p className='font-medium'>₹100</p>
+                                <p className='font-medium'>-₹{discount.toFixed(2)}</p>
                             </div>
                             <div className='flex justify-between text-sm'>
                                 <p className='text-gray-500'>Shipping Cost</p>
-                                <p className='font-medium'>₹1000</p>
+                                <p className='font-medium'>{shipping === 0 ? "Free" : `₹${shipping}`}</p>
                             </div>
                             <hr className='text-gray-200'/>
                             <div className='flex justify-between'>
                                 <p className='text-gray-800 font-semibold'>Total</p>
-                                <p className='font-medium'>₹
-                                    {cart.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)}
+                                <p className='font-medium'>₹{total.toFixed(2)}
+                                    {/* {cart.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)} */}
                                 </p>
                             </div>
 
